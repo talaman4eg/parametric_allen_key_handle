@@ -7,35 +7,60 @@ A customizable 3D printable allen key handle that stores multiple hex keys in a 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `key_sizes` | Array of hex key sizes in mm | `[1.5, 6, 2, 5.5, 2.5, 5, 3, 4]` |
+| `center_key_size` | Center key diameter in mm (false to disable) | `false` |
 | `key_labels` | Optional custom labels (uses size if empty) | `[]` |
-| `handle_length` | Handle length in mm | `55` |
-| `handle_diameter` | Handle diameter in mm | `25` |
-| `tolerance` | Additional clearance for keys in mm | `0.5` |
-| `alternate` | Alternate key placement on opposite sides | `true` |
+| `length` | Handle length in mm | `65` |
+| `diameter` | Handle diameter in mm | `25` |
+| `tolerance` | Additional clearance for keys in mm | `0.2` |
+| `slot_depth` | Depth of hex key slots in mm | `32` |
+| `text_size` | Size of text labels | `4.5` |
+| `wall` | Wall thickness around each key slot in mm | `1.2` |
+| `key_faces` | Number of faces for hex keys (6 or 12) | `6` |
+| `alternate` | Alternate key placement on opposite sides | `false` |
 
-**Tip**: Alternate small and large key sizes in the list for better spacing and ergonomics.
+### Tips
+- **Key arrangement**: Alternate small and large key sizes for better spacing and ergonomics
+- **Empty faces**: Use `0` or `false` as a key size to create empty faces for magnets or custom attachments
+- **Key alignment**: Set `key_faces = 12` to align all hex keys in the same orientation
+- **Center key**: The `center_key_size` feature creates a center void for additional functionality (requires slicer configuration)
+
 
 ## Examples
 
 ### Basic Usage
 ```scad
-alen_key_handle();
+allen_key_handle();
 ```
 
 ### Custom Labels (Non-alternating)
 ```scad
-alen_key_handle(
+allen_key_handle(
     key_labels = ["1.5mm", "6mm", "2mm", "5.5mm"],
     alternate = false
 );
 ```
 
-### SAE Sizes
+### SAE/Imperial Sizes
 ```scad
-inch = 25.4;
-alen_key_handle(
-    key_sizes = [inch*1/16, inch*1/4, inch*3/32, inch*3/16],
-    key_labels = ["1/16\"", "1/4\"", "3/32\"", "3/16\""]
+in = 25.4;
+allen_key_handle(
+    key_sizes = [5/64*in, 3/16*in, 1/32*in, 1/4*in],
+    key_labels = ["5/64\"", "3/16\"", "1/32\"", "1/4\""],
+    diameter = 27,
+    key_faces = 12,
+    tolerance = 0.1
+);
+```
+
+### Advanced Configuration
+```scad
+allen_key_handle(
+    key_sizes = [1.5, 6, 0, 5.5, 2.5, 5, 3, 4], // 0 creates empty face
+    key_labels = ["1.5", "6", "MAG", "5.5", "2.5", "5", "3", "4"],
+    length = 70,
+    diameter = 30,
+    alternate = true,
+    key_faces = 12
 );
 ```
 
