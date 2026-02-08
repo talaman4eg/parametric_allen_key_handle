@@ -22,7 +22,7 @@ A customizable 3D printable allen key handle that stores multiple hex keys in a 
 - **Key arrangement**: Alternate small and large key sizes for better spacing and ergonomics
 - **Empty faces**: Use `0` or `false` as a key size to create empty faces for magnets or custom attachments
 - **Key alignment**: Set `key_faces = 12` to align all hex keys in the same orientation
-- **Center key**: The `center_key_size` feature creates a center void for additional functionality (requires slicer configuration)
+- **Center key**: (EXPERIMENTAL) The `center_key_size` feature creates a center void for additional functionality (requires slicer configuration - split resulting STL to parts, convert center part to 'negative volume' or similar, place as desired)
 
 
 ## Examples
